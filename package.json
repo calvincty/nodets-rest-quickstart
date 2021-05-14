@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf ./dist && prettier --write ./src && tsc"
+    "build": "rm -rf ./dist && prettier --write ./src && tsc",
+    "watch": "tsc && node dist/app.js",
+    "dev": "nodemon --watch src/ --exec \"npm run watch\" --verbose -e ts"
   },
   "keywords": [],
   "author": "",
