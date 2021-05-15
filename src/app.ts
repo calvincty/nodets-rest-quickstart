@@ -1,6 +1,6 @@
 import express from 'express';
 import config from './config/config';
-import logging from './config/logging';
+import logger from './config/logging';
 import bookRouter from './routes/books';
 
 const router = express();
@@ -8,10 +8,16 @@ const NAMESPACE = 'Server';
 
 /** Log the request */
 router.use((req, res, next) => {
-    logging.info(NAMESPACE, `${req.method} ${req.url} ${req.socket.remoteAddress}`);
+    logger.info({
+        namespace: NAMESPACE,
+        message: `${req.method} ${req.url} ${req.socket.remoteAddress}`
+    });
 
     res.on('finish', () => {
-        logging.info(NAMESPACE, `${req.method} ${req.url} ${req.socket.remoteAddress} ${res.statusCode}`);
+        logger.info({
+            namespace: NAMESPACE,
+            message: `${req.method} ${req.url} ${req.socket.remoteAddress} ${res.statusCode}`
+        });
     });
 
     next();
@@ -45,5 +51,8 @@ router.use((req, res, next) => {
     });
 });
 router.listen(config.server.port, () => {
-    logging.info(NAMESPACE, `Server is listenting at ${config.server.port}`);
+    logger.info({
+        namespace: NAMESPACE,
+        message: `Server is listenting at ${config.server.port}`
+    });
 });
