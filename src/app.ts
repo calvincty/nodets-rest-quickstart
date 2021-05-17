@@ -12,14 +12,6 @@ router.use((req, res, next) => {
         namespace: NAMESPACE,
         message: `${req.method} ${req.url} ${req.socket.remoteAddress}`
     });
-
-    res.on('finish', () => {
-        logger.info({
-            namespace: NAMESPACE,
-            message: `${req.method} ${req.url} ${req.socket.remoteAddress} ${res.statusCode}`
-        });
-    });
-
     next();
 });
 

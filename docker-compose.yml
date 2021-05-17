@@ -10,3 +10,18 @@ services:
       NODE_ENV: production
     ports:
       - 3000:3000
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    volumes:
+      - mongodbvol:/data/db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+
+volumes:
+  mongodbvol:
+    external: true
