@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    networks: 
+    networks:
       - nodets-rest-net
     environment:
       NODE_ENV: production
