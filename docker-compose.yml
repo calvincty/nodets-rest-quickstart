@@ -3,19 +3,26 @@ version: '3.4'
 services:
   app:
     image: nodets-quickstart
+    container_name: nodets-rest-app
     build:
       context: .
       dockerfile: ./Dockerfile
+    networks: 
+      - nodets-rest-net
     environment:
       NODE_ENV: production
     ports:
       - 3000:3000
+    depends_on:
+      - mongodb
   mongodb:
     image: mongo
-    container_name: mongodb
+    container_name: nodets-rest-db
     volumes:
       - mongodbvol:/data/db
     restart: always
+    networks:
+      - nodets-rest-net
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -24,4 +31,8 @@ services:
 
 volumes:
   mongodbvol:
+    external: true
+
+networks:
+  nodets-rest-net:
     external: true

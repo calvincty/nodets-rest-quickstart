@@ -10,7 +10,7 @@ const config = {
         user: process.env.MONGODB_USER,
         pwd: process.env.MONGODB_PWD,
         host: process.env.MONGODB_HOST,
-        port: process.env.MONGODB_PWD,
+        port: process.env.MONGODB_PORT,
         logdb: process.env.LOG_DB
     }
 };
